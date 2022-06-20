@@ -764,7 +764,11 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
 
     if(!configPortalActive) break;
 
+    #ifdef CONFIG_FREERTOS_UNICORE
+    delay(10);
+    #else
     yield(); // watchdog
+    #endif
   }
 
   #ifdef WM_DEBUG_LEVEL
